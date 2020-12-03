@@ -1,9 +1,11 @@
 //Language builder widget
 import 'package:flutter/material.dart';
+import 'package:hasanat/widgets/default_button.dart';
 import 'package:language_pickers/language_pickers.dart';
 import 'package:language_pickers/languages.dart';
 import 'package:language_pickers/utils/utils.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import '../sign_up_screen.dart';
 import 'name_builder.dart';
 
 //Save language to shared preference
@@ -38,7 +40,7 @@ class _LanguageBuilderState extends State<LanguageBuilder> {
 
   Widget _buildDropdownItem(Language language) {
     return Row(
-      children: <Widget>[
+      children: [
         SizedBox(
           width: 8.0,
         ),
@@ -49,7 +51,7 @@ class _LanguageBuilderState extends State<LanguageBuilder> {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
+    return ListView(
       children: [
         Container(
           margin: EdgeInsets.all(20),
@@ -63,13 +65,12 @@ class _LanguageBuilderState extends State<LanguageBuilder> {
             },
           ),
         ),
-        FlatButton(
-          onPressed: () {
+        DefaultButton(
+          press: () {
             saveLangPerfs(_selectedLanguage.name).then(
-              (_) => Navigator.pushNamed(context, NameBuilder.routeName),
-            );
+                (_) => Navigator.pushNamed(context, NameBuilder.routeName));
           },
-          child: Text('NEXT'),
+          text: 'NEXT',
         )
       ],
     );

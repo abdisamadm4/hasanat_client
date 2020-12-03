@@ -1,8 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:hasanat/widgets/default_button.dart';
+import 'package:hasanat/widgets/logo_builder.dart';
+import 'package:hasanat/widgets/quran_builder.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import '../sign_up_screen.dart';
 
 import 'emai_builder.dart';
 
+//Save value to shared preferences
 Future<bool> saveNamePerfs(String name) async {
   SharedPreferences prefs = await SharedPreferences.getInstance();
   prefs.setString('name', name);
@@ -32,11 +37,22 @@ class NameBuilder extends StatefulWidget {
 class _NameBuilderState extends State<NameBuilder> {
   final _nameController = TextEditingController();
 
+  @override
+  void initState() {
+    getBoolName().then((bool) => {
+          if (!bool) {currentView = NameBuilder()}
+        });
+    super.initState();
+  }
+
   Widget build(BuildContext context) {
     return Scaffold(
       body: SafeArea(
-        child: Column(
+        child: ListView(
           children: [
+            LogoBuilder(),
+            // StepsBuilder(),
+            QuranBuilder(),
             Container(
               margin: EdgeInsets.all(20),
               child: TextField(
@@ -44,14 +60,17 @@ class _NameBuilderState extends State<NameBuilder> {
                 decoration: InputDecoration(hintText: 'Enter your Name'),
               ),
             ),
-            FlatButton(
-              onPressed: () {
+            SizedBox(
+              height: 10,
+            ),
+            DefaultButton(
+              press: () {
                 saveNamePerfs(_nameController.text).then((_) => {
                       Navigator.pushNamed(context, EmailBuilder.routeName),
                     });
               },
-              child: Text('NEXT'),
-            )
+              text: 'NEXT',
+            ),
           ],
         ),
       ),

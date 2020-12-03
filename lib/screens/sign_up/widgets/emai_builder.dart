@@ -1,6 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:hasanat/screens/home/home_screen.dart';
+import 'package:hasanat/screens/sign_up/widgets/gender_builder.dart';
+import 'package:hasanat/widgets/default_button.dart';
+import 'package:hasanat/widgets/logo_builder.dart';
+import 'package:hasanat/widgets/quran_builder.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+
+import '../sign_up_screen.dart';
+import 'name_builder.dart';
 
 Future<bool> saveEmailPerfs(String email) async {
   SharedPreferences prefs = await SharedPreferences.getInstance();
@@ -31,11 +37,26 @@ class EmailBuilder extends StatefulWidget {
 class _EmailBuilderState extends State<EmailBuilder> {
   final _emailController = TextEditingController();
 
+  @override
+  void initState() {
+    getBoolEmail().then((bool) => {
+          if (!bool)
+            {
+              currentView = EmailBuilder(),
+            }
+        });
+    super.initState();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: SafeArea(
-        child: Column(
+        child: ListView(
           children: [
+            LogoBuilder(),
+            // StepsBuilder(),
+            QuranBuilder(),
             Container(
               margin: EdgeInsets.all(20),
               child: TextField(
@@ -43,14 +64,17 @@ class _EmailBuilderState extends State<EmailBuilder> {
                 decoration: InputDecoration(hintText: 'Enter your Email'),
               ),
             ),
-            FlatButton(
-              onPressed: () {
+            SizedBox(
+              height: 10,
+            ),
+            DefaultButton(
+              press: () {
                 saveEmailPerfs(_emailController.text).then((_) => {
-                      Navigator.pushNamed(context, HomeScreen.routeName),
+                      Navigator.pushNamed(context, GenderBuilder.routeName),
                     });
               },
-              child: Text('NEXT'),
-            )
+              text: 'NEXT',
+            ),
           ],
         ),
       ),
