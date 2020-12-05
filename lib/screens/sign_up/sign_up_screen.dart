@@ -1,13 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:hasanat/screens/home/home_screen.dart';
-import 'package:hasanat/screens/sign_up/widgets/gender_builder.dart';
-import 'package:hasanat/widgets/logo_builder.dart';
-import 'package:hasanat/widgets/quran_builder.dart';
-import 'widgets/emai_builder.dart';
+import 'package:hasanat/widgets/widgets.dart';
+import 'widgets/get/get.dart';
 import 'widgets/language_builder.dart';
-import 'widgets/name_builder.dart';
-
-Widget currentView;
+import 'widgets/widgets.dart';
 
 class SignUpScreen extends StatefulWidget {
   static String routeName = '/';
@@ -16,15 +12,59 @@ class SignUpScreen extends StatefulWidget {
 }
 
 class _SignUpScreenState extends State<SignUpScreen> {
+  Widget currentView;
+
   @override
   void initState() {
-    getBoolLanguage().then((bool) => {
-          print(bool),
-          setState(() {
-            if (bool) {
-              return currentView = LanguageBuilder();
+    getBoolLanguage().then((key) => {
+          print(key),
+          if (!key)
+            {
+              setState(() {
+                currentView = LanguageBuilder();
+              })
             }
-          })
+          else
+            {
+              getBoolName().then((key) => {
+                    print(key),
+                    if (!key)
+                      {
+                        setState(() {
+                          currentView = NameBuilder();
+                        })
+                      }
+                    else
+                      {
+                        getBoolEmail().then((key) => {
+                              if (!key)
+                                {
+                                  setState(() {
+                                    currentView = EmailBuilder();
+                                  })
+                                }
+                              else
+                                {
+                                  getBoolGender().then((key) => {
+                                        if (!key)
+                                          {
+                                            setState(() {
+                                              currentView = GenderBuilder();
+                                            })
+                                          }
+                                        else
+                                          {
+                                            setState(() {
+                                              Navigator.pushNamed(context,
+                                                  HomeScreen.routeName);
+                                            })
+                                          }
+                                      })
+                                }
+                            })
+                      }
+                  })
+            }
         });
 
     super.initState();
@@ -41,15 +81,11 @@ class _SignUpScreenState extends State<SignUpScreen> {
             ),
             LogoBuilder(),
             SizedBox(
-              height: 5,
-            ),
-            // StepsBuilder(),
-            SizedBox(
-              height: 20,
+              height: 40,
             ),
             QuranBuilder(),
             Container(
-              height: 150,
+              height: 200,
               child: currentView,
             ),
           ],

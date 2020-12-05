@@ -6,7 +6,7 @@ class QuranBuilder extends StatelessWidget {
     return Container(
       margin: EdgeInsets.all(20),
       width: double.infinity,
-      height: 200,
+      height: 180,
       child: Text(
         'وَأَقِمِ الصَّلَاةَ طَرَفَيِ النَّهَارِ وَزُلَفًا مِّنَ اللَّيْلِ ۚ إِنَّ الْحَسَنَاتِ يُذْهِبْنَ السَّيِّئَاتِ ۚ ذَٰلِكَ ذِكْرَىٰ لِلذَّاكِرِينَ',
         style: TextStyle(

@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:google_fonts/google_fonts.dart';
-import '../constant_styles.dart';
+
+import '../constants.dart';
 
 class DefaultButton extends StatelessWidget {
   const DefaultButton({
@@ -14,20 +16,32 @@ class DefaultButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: EdgeInsets.all(10),
-      width: double.infinity,
+      margin: EdgeInsets.all(20),
       height: 56,
       child: FlatButton(
-        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
         color: kPrimaryColor,
         onPressed: press,
-        child: Text(
-          text,
-          style: GoogleFonts.muli(
-              fontSize: 20,
-              color: Colors.white,
-              letterSpacing: 1.3,
-              fontWeight: FontWeight.bold),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Text(
+              text,
+              style: GoogleFonts.lato(
+                  fontSize: 22,
+                  color: Colors.white,
+                  letterSpacing: 1.3,
+                  fontWeight: FontWeight.bold),
+            ),
+            SizedBox(
+              width: 20,
+            ),
+            SvgPicture.asset(
+              "assets/icons/next.svg",
+              width: 16,
+              height: 16,
+            )
+          ],
         ),
       ),
     );

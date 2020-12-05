@@ -1,34 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:hasanat/screens/home/home_screen.dart';
 import 'package:hasanat/screens/sign_up/widgets/sign_up.dart';
-import 'package:hasanat/widgets/default_button.dart';
-import 'package:hasanat/widgets/logo_builder.dart';
-import 'package:hasanat/widgets/quran_builder.dart';
-import 'package:shared_preferences/shared_preferences.dart';
-
+import 'package:hasanat/widgets/widgets.dart';
 import '../sign_up_screen.dart';
-import 'emai_builder.dart';
+import 'get/get_email.dart';
+import 'get/get_gender.dart';
+import 'get/get_name.dart';
 import 'language_builder.dart';
-import 'name_builder.dart';
-
-Future<bool> saveGenderPrefs(String gender) async {
-  SharedPreferences prefs = await SharedPreferences.getInstance();
-  prefs.setString('gender', gender);
-  return bool.fromEnvironment(gender);
-}
-
-//Get language from shared preference
-Future<String> getGenderPrefs() async {
-  SharedPreferences prefs = await SharedPreferences.getInstance();
-  String gender = prefs.getString('gender');
-  return gender;
-}
-
-Future<bool> getBoolGender() async {
-  SharedPreferences prefs = await SharedPreferences.getInstance();
-  bool val = prefs.containsKey('gender');
-  return val;
-}
 
 class GenderBuilder extends StatefulWidget {
   static String routeName = '/gender';
@@ -45,12 +22,6 @@ class _GenderBuilderState extends State<GenderBuilder> {
 
   @override
   void initState() {
-    getBoolGender().then((bool) => {
-          if (!bool)
-            {
-              currentView = EmailBuilder(),
-            }
-        });
     getLangPrefs().then((String language) => {
           setState(() {
             this._langauge = language;
@@ -74,12 +45,10 @@ class _GenderBuilderState extends State<GenderBuilder> {
       body: SafeArea(
         child: ListView(
           children: [
-            LogoBuilder(),
-            // StepsBuilder(),
-            QuranBuilder(),
             Column(
               children: [
                 Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
                     Row(
                       children: [
@@ -116,18 +85,20 @@ class _GenderBuilderState extends State<GenderBuilder> {
               ],
             ),
             SizedBox(
-              height: 10,
+              height: 30,
             ),
             DefaultButton(
               press: () {
-                saveGenderPrefs(_gender).then(
-                  (_) => {
-                    Navigator.pushNamed(context, HomeScreen.routeName),
-                  },
-                );
-                signup(_langauge, _name, _email, _gender);
+                if (_gender != '') {
+                  saveGenderPrefs(_gender).then(
+                    (_) => {
+                      Navigator.pushNamed(context, SignUpScreen.routeName),
+                    },
+                  );
+                  signup(_langauge, _name, _email, _gender);
+                }
               },
-              text: 'DONE',
+              text: 'Done',
             )
           ],
         ),

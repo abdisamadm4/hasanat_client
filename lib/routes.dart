@@ -1,10 +1,6 @@
 import 'package:flutter/widgets.dart';
-import 'package:hasanat/screens/home/home_screen.dart';
-import 'package:hasanat/screens/sign_up/sign_up_screen.dart';
-import 'package:hasanat/screens/sign_up/widgets/gender_builder.dart';
-import 'screens/sign_up/widgets/emai_builder.dart';
-import 'screens/sign_up/widgets/language_builder.dart';
-import 'screens/sign_up/widgets/name_builder.dart';
+import 'screens/screens.dart';
+import 'screens/sign_up/widgets/widgets.dart';
 
 final Map<String, WidgetBuilder> routes = {
   HomeScreen.routeName: (context) => HomeScreen(),
@@ -12,5 +8,11 @@ final Map<String, WidgetBuilder> routes = {
   LanguageBuilder.routeName: (context) => LanguageBuilder(),
   NameBuilder.routeName: (context) => NameBuilder(),
   EmailBuilder.routeName: (context) => EmailBuilder(),
-  GenderBuilder.routeName: (context) => GenderBuilder()
+  GenderBuilder.routeName: (context) => GenderBuilder(),
+  PrayerScreen.routeName: (context) => PrayerScreen(),
+  ZikrScreen.routeName: (context) => ZikrScreen(),
+  QuranScreen.routeName: (context) => QuranScreen(),
+  TargetsScreen.routeName: (context) => TargetsScreen(),
+  ChannelsScreen.routeName: (context) => ChannelsScreen(),
+  CheckListScreen.routeName: (context) => CheckListScreen()
 };

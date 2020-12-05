@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:hasanat/routes.dart';
 import 'package:hasanat/screens/sign_up/sign_up_screen.dart';
 import 'package:hasanat/theme.dart';

@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-import 'constant_styles.dart';
+import 'constants.dart';
 
 ThemeData theme() {
   return ThemeData(
-    scaffoldBackgroundColor: Color(0xFFF5F6F9),
+    scaffoldBackgroundColor: Colors.white,
     fontFamily: GoogleFonts.muli().toString(),
     appBarTheme: appBarTheme(),
     textTheme: textTheme(),

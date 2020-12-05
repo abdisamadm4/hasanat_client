@@ -5,8 +5,9 @@ class LogoBuilder extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
+      padding: EdgeInsets.all(20),
       width: double.infinity,
-      height: 250,
+      height: 200,
       child: SvgPicture.asset(
         "assets/icons/logo.svg",
         fit: BoxFit.contain,

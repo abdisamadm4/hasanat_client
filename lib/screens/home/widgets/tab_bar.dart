@@ -1,16 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 
 class TabBarBuilder extends StatelessWidget {
   const TabBarBuilder({
     Key key,
-    @required this.bgColor,
     @required this.count,
     @required this.icon,
     @required this.press,
   }) : super(key: key);
-  final Color bgColor;
   final String count;
-  final IconData icon;
+  final String icon;
   final Function press;
 
   @override
@@ -20,19 +19,20 @@ class TabBarBuilder extends StatelessWidget {
       child: Column(
         children: [
           Container(
-            width: 40,
-            height: 40,
+            width: 20,
+            height: 20,
             decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(20), color: bgColor),
+              borderRadius: BorderRadius.circular(20),
+            ),
             child: Tab(
-              icon: Icon(
+              icon: SvgPicture.asset(
                 icon,
-                color: Colors.white,
+                fit: BoxFit.cover,
               ),
             ),
           ),
           SizedBox(
-            width: 10,
+            height: 7,
           ),
           Text(
             count,
